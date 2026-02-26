@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Shaked Arazi — Backend / Cloud / Security portfolio. Projects, skills, and contact." />
+  <title>Shaked Arazi — Portfolio</title>
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --panel: rgba(255,255,255,0.06);
+      --panel-strong: rgba(255,255,255,0.10);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.70);
+      --muted2: rgba(255,255,255,0.55);
+      --border: rgba(255,255,255,0.12);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 18px;
+      --max: 1040px;
+      --accent: #7c5cff;   /* purple */
+      --accent2: #22c55e;  /* green */
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      color: var(--text);
+      background: radial-gradient(1200px 700px at 10% 10%, rgba(124,92,255,0.18), transparent 55%),
+                  radial-gradient(900px 600px at 85% 25%, rgba(34,197,94,0.12), transparent 55%),
+                  radial-gradient(800px 500px at 50% 95%, rgba(59,130,246,0.10), transparent 55%),
+                  var(--bg);
+      line-height: 1.55;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 28px 18px 80px; }
+
+    /* Top nav */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(11,15,23,0.65);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 650;
+      letter-spacing: 0.2px;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #3b82f6);
+      box-shadow: 0 0 0 4px rgba(124,92,255,0.15);
+    }
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .nav-links a { padding: 6px 8px; border-radius: 10px; }
+    .nav-links a:hover { background: rgba(255,255,255,0.06); text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      margin-top: 26px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero-inner {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+    }
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+    }
+
+    .kicker {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted2);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 3.2vw, 44px);
+      line-height: 1.12;
+      letter-spacing: -0.6px;
+    }
+    .lead {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 62ch;
+    }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 14px 0 0; }
+    .badge {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      border-left: 1px solid var(--border);
+      padding-left: 22px;
+    }
+    @media (max-width: 900px) { .hero-card { border-left: 0; padding-left: 0; border-top: 1px solid var(--border); padding-top: 18px; } }
+
+    .cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      font-size: 14px;
+      text-decoration: none;
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn:hover { background: rgba(255,255,255,0.08); text-decoration: none; }
+    .btn.primary {
+      border-color: rgba(124,92,255,0.35);
+      background: linear-gradient(90deg, rgba(124,92,255,0.35), rgba(59,130,246,0.22));
+    }
+    .btn.primary:hover { background: linear-gradient(90deg, rgba(124,92,255,0.45), rgba(59,130,246,0.28)); }
+    .mini {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted2);
+      margin-top: 10px;
+    }
+
+    /* Sections */
+    section { margin-top: 28px; }
+    .section-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+    .section-title h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: -0.2px;
+    }
+    .section-title span {
+      color: var(--muted2);
+      font-size: 13px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 980px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+
+    .card {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.20);
+    }
+    .card:hover { background: rgba(255,255,255,0.055); }
+    .card h3 { margin: 0 0 8px; font-size: 16px; letter-spacing: -0.2px; }
+    .card p { margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    .pill {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: rgba(255,255,255,0.72);
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 820px) { .list { grid-template-columns: 1fr; } }
+
+    .kv {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .kv b { color: var(--text); font-weight: 600; }
+
+    footer {
+      margin-top: 32px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted2);
+      font-size: 13px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .sr-only { position: absolute; left: -9999px; }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="dot" aria-hidden="true"></div>
+        <div>Shaked Arazi</div>
+      </div>
+      <div class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#highlights">Highlights</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="kicker">Backend · Cloud · Security</div>
+          <h1>Building reliable systems with strong constraints and clear observability.</h1>
+          <p class="lead">
+            Computer Science student (Israel) focused on backend and infrastructure engineering.
+            I build event-driven systems, containerized services, and security-oriented tooling with emphasis on correctness,
+            debuggability, and blast-radius awareness.
+          </p>
+
+          <div class="cta-row">
+            <!-- TODO: replace links -->
+            <a class="btn primary" href="https://github.com/shakedarazi" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="btn" href="#projects">View Projects</a>
+            <!-- Optional: replace with LinkedIn / CV link -->
+            <a class="btn" href="#contact">Contact</a>
+          </div>
+
+          <div class="badges" aria-label="Key themes">
+            <div class="badge">Event-driven architecture</div>
+            <div class="badge">DAG validation</div>
+            <div class="badge">Trust boundaries</div>
+            <div class="badge">Attack-path thinking</div>
+            <div class="badge">Observability</div>
+          </div>
+
+          <div class="mini">Tip: keep this page simple — let the projects prove depth.</div>
+        </div>
+
+        <div class="hero-card">
+          <div class="kicker">Quick facts</div>
+
+          <div class="kv"><b>Location</b><span>Israel</span></div>
+          <div class="kv"><b>Focus</b><span>Backend · Platform · Cloud Security</span></div>
+          <div class="kv"><b>Stack</b><span>Java · Spring Boot · Python · Docker</span></div>
+          <div class="kv"><b>Interests</b><span>Concurrency · Performance · Infra analysis</span></div>
+
+          <div class="mini" style="margin-top: 12px;">
+            You can add a CV link here later (PDF on GitHub).
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="section-title">
+        <h2>Projects</h2>
+        <span>Pick 3–4 strong projects. Each card links out.</span>
+      </div>
+
+      <div class="grid">
+        <!-- 1 -->
+        <a class="card" href="https://github.com/shakedarazi/ChatBot" target="_blank" rel="noreferrer">
+          <h3>Hybrid Product Information Agent (RAG)</h3>
+          <p>
+            A retrieval-augmented system that answers product questions with structured grounding.
+            Focus on safe retrieval, deterministic outputs, and evaluation.
+          </p>
+          <div class="meta">
+            <span class="pill">RAG</span>
+            <span class="pill">Backend</span>
+            <span class="pill">Evaluation</span>
+          </div>
+        </a>
+
+        <!-- 2 -->
+        <a class="card" href="https://github.com/shakedarazi" target="_blank" rel="noreferrer">
+          <h3>Event-Driven DAG Computation Engine</h3>
+          <p>
+            Configuration-driven, event-driven execution engine modeling computation as a DAG of Topics and Agents.
+            Emphasis on validation, isolation, and debuggability.
+          </p>
+          <div class="meta">
+            <span class="pill">Java</span>
+            <span class="pill">Spring Boot</span>
+            <span class="pill">DAG</span>
+          </div>
+        </a>
+
+        <!-- 3 -->
+        <a class="card" href="https://github.com/shakedarazi" target="_blank" rel="noreferrer">
+          <h3>ContextGuard (IaC Attack-Path Analyzer)</h3>
+          <p>
+            Infrastructure-as-Code analyzer that models risk and attack paths (blast radius), designed to reduce false positives
+            with contextual scoring.
+          </p>
+          <div class="meta">
+            <span class="pill">Terraform</span>
+            <span class="pill">Security</span>
+            <span class="pill">Graph</span>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="section-title">
+        <h2>Skills</h2>
+        <span>Short, concrete, and relevant.</span>
+      </div>
+
+      <div class="list">
+        <div class="card">
+          <h3>Backend</h3>
+          <p>Designing APIs, dataflow, validation layers, and service boundaries.</p>
+          <div class="meta">
+            <span class="pill">Java</span>
+            <span class="pill">Spring Boot</span>
+            <span class="pill">Python</span>
+            <span class="pill">REST</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Infrastructure</h3>
+          <p>Containerization, environment parity, and production-style runbooks.</p>
+          <div class="meta">
+            <span class="pill">Docker</span>
+            <span class="pill">Compose</span>
+            <span class="pill">Linux</span>
+            <span class="pill">CI</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Security Engineering</h3>
+          <p>Threat modeling, least privilege thinking, and attack-path narratives.</p>
+          <div class="meta">
+            <span class="pill">IAM</span>
+            <span class="pill">Blast radius</span>
+            <span class="pill">Hardening</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Systems Thinking</h3>
+          <p>Concurrency, observability, and reliability in distributed environments.</p>
+          <div class="meta">
+            <span class="pill">Async</span>
+            <span class="pill">Threading</span>
+            <span class="pill">Tracing</span>
+            <span class="pill">Metrics</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HIGHLIGHTS -->
+    <section id="highlights">
+      <div class="section-title">
+        <h2>Highlights</h2>
+        <span>These are “resume bullets” in portfolio form.</span>
+      </div>
+
+      <div class="card">
+        <ul style="margin: 0; padding-left: 18px; color: var(--muted);">
+          <li>Built multi-service applications with explicit trust boundaries and clean separation of concerns.</li>
+          <li>Designed validation-heavy systems (DAG enforcement, config-driven execution) to improve correctness and debugging.</li>
+          <li>Modeled attack paths in infra contexts to prioritize issues and reduce false positives.</li>
+          <li>Worked in 24/7 production monitoring environment, analyzing dependency-driven behavior and incidents.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-title">
+        <h2>Contact</h2>
+        <span>Keep it simple. One click.</span>
+      </div>
+
+      <div class="grid">
+        <!-- TODO: replace with your real links -->
+        <a class="card" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">
+          <h3>LinkedIn</h3>
+          <p>Connect and message me.</p>
+          <div class="meta"><span class="pill">linkedin.com/in/…</span></div>
+        </a>
+
+        <a class="card" href="mailto:you@example.com">
+          <h3>Email</h3>
+          <p>Send me an email.</p>
+          <div class="meta"><span class="pill">you@example.com</span></div>
+        </a>
+
+        <a class="card" href="https://github.com/shakedarazi" target="_blank" rel="noreferrer">
+          <h3>GitHub</h3>
+          <p>See all repositories.</p>
+          <div class="meta"><span class="pill">@shakedarazi</span></div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="year"></span> Shaked Arazi</div>
+      <div>Hosted on GitHub Pages · Single-file static site</div>
+    </footer>
+
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
